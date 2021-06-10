@@ -16,7 +16,6 @@ exports.up = function (knex) {
         .references('recipe_id')
         .inTable('recipes')
         .onDelete('RESTRICT')
-        .onUpdate('RESTRICT') // NEVER WORRY
       })
       .createTable('ingredients', table => {
         table.increments('ingredient_id')
@@ -30,24 +29,22 @@ exports.up = function (knex) {
           .references('step_id')
           .inTable('steps')
           .onDelete('RESTRICT')
-          .onUpdate('RESTRICT') // NEVER WORRY
         table.integer('ingredient_id')
           .unsigned()
           .notNullable()
           .references('ingredient_id')
           .inTable('ingredients')
           .onDelete('RESTRICT')
-          .onUpdate('RESTRICT') // NEVER WORRY
         table.integer('quantity', 138).notNullable()
       })
   };
   
   exports.down = function (knex) {
-    // we drop them in reverse order we created them
+   
     return knex.schema
-      .dropTableIfExists('zoo_animals')
-      .dropTableIfExists('animals')
-      .dropTableIfExists('species')
-      .dropTableIfExists('zoos')
+      .dropTableIfExists('recipes')
+      .dropTableIfExists('steps')
+      .dropTableIfExists('ingredients')
+      .dropTableIfExists('steps_ingredients')
   };
   
