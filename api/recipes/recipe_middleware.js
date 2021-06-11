@@ -1,5 +1,5 @@
-const Recipe = require('../recipes/recipe_model')
-const db = require('../../db-config')
+const Recipe = require('./recipe_model')
+const db = require('../../data/db-config')
 
 const checkRecipeId = async (req, res, next) => {
   try {

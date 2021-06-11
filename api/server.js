@@ -4,7 +4,7 @@ const router = require('./recipes/recipe_router');
 const server = express();
 
 server.use(express.json());
-server.use('/data/api', router);
+server.use('/api', router);
 
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(500).json({
