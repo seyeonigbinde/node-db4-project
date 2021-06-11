@@ -7,7 +7,7 @@ const checkRecipeId = async (req, res, next) => {
     .where('recipe_id', req.params.recipe_id).first()
     if(!recipe) {
       next({status: 404, 
-        message: `scheme with recipe_id ${req.params.recipe_id} is not found`})
+        message: `recipe with recipe_id ${req.params.recipe_id} is not found`})
     } else {
       req.recipe = recipe
       next()

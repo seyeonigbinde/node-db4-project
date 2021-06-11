@@ -3,8 +3,11 @@ const db = require('../../data/db-config')
 
 async function getRecipeById(recipe_id) { 
   const findRecipe = await db('recipes as re')
-  .select('re.recipe_name', 'st.*', 're.recipe_id')
+  .select('re.recipe_name', 'st.*', 're.recipe_id', 
+  'si.ingredient_id','i.ingredient_id', 'i.ingredient_name', 'si.quantity')
   .leftJoin('steps as st', 're.recipe_id', '=', 'st.recipe_id')
+  .leftJoin('steps_ingredients as si', 'si.step_id', '=', 'st.step_id')
+  .leftJoin('ingredients as i', 'si.ingredient_id', '=', 'i.ingredient_id')
   .where ('re.recipe_id', recipe_id)
   .orderBy('st.step_number', 'asc')
 
